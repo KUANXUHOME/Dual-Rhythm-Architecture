@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Fonts */
+  --font-sora: 'Sora', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Brand palette — Green + White */
+  --color-primary: #0A6640;
+  --color-primary-light: #10B981;
+  --color-primary-dim: rgba(10, 102, 64, 0.08);
+  --color-primary-fore: #FFFFFF;
+  --color-primary-foreground: #FFFFFF;
+
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F0FDF4;
+  --color-surface-muted: #F9FAFB;
+
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+
+  --color-ink: #0F1A14;
+  --color-ink-muted: #4B5563;
+  --color-ink-faint: #9CA3AF;
+
+  --color-gold: #C9A84C;
+  --color-gold-dim: rgba(201, 168, 76, 0.12);
+
+  --color-emerald: #059669;
+  --color-emerald-light: #34D399;
+
+  --color-danger: #DC2626;
+  --color-danger-bg: #FEF2F2;
+
+  --color-warning: #F59E0B;
+  --color-warning-bg: #FFFBEB;
+
+  /* shadcn convention tokens (mapped to DRA values so shadcn components resolve) */
+  --color-background: #FFFFFF;
+  --color-foreground: #0F1A14;
+  --color-ring: #0A6640;
+  --color-input: #E2E8F0;
+  --color-destructive: #DC2626;
+  --color-muted-foreground: #4B5563;
+
+  /* Radius */
+  --radius-brand: 10px;
+  --radius-large: 16px;
+  --radius-xl2: 20px;
+}
+
+@layer base {
+  * { @apply box-border; }
+  /* v4 defaults border-color to currentColor (not v3's gray-200); restore DRA border token */
+  *, ::before, ::after { border-color: var(--color-border); }
+  body { @apply bg-white text-ink antialiased; font-family: var(--font-sora); }
+  h1, h2, h3, h4 { font-family: var(--font-sora); }
+}
+
+@layer components {
+  /* Primary CTA */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-primary text-white font-semibold
+           px-5 py-2.5 rounded-brand text-sm transition-all hover:bg-primary/90
+           focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 text-ink-muted font-medium
+           px-5 py-2.5 rounded-brand text-sm border border-border transition-all
+           hover:border-primary hover:text-primary;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 bg-gold text-ink font-bold
+           px-5 py-2.5 rounded-brand text-sm transition-all hover:brightness-105;
+  }
+
+  /* Section label */
+  .label-tag {
+    @apply text-xs font-semibold uppercase tracking-widest text-primary-light;
+  }
+
+  /* Chat bubble */
+  .bubble-user {
+    @apply bg-primary text-white rounded-2xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed max-w-[80%] ml-auto;
+  }
+  .bubble-agent {
+    @apply bg-surface-subtle border border-border rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed max-w-[85%];
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Focus ring */
+*:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
