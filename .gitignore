@@ -57,4 +57,10 @@ strategy-analysis.html
 *.swp
 *.swo
 *~
+
+# AI assistant local context (not for public repo)
+.workbuddy/
+.codebuddy/
+CLAUDE.md
+AGENTS.md
 app/.layout.tsx.swp
